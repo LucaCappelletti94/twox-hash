@@ -14,7 +14,7 @@ pub const PRIME_5: u32 = 374_761_393;
 
 #[cfg_attr(feature = "serialize", derive(Deserialize, Serialize))]
 #[cfg_attr(feature = "mem_dbg", derive(mem_dbg::MemSize, mem_dbg::MemDbg))]
-#[derive(Copy, Clone, PartialEq)]
+#[derive(Copy, Clone, PartialEq, Eq)]
 struct XxCore {
     v1: u32,
     v2: u32,
@@ -30,7 +30,7 @@ struct XxCore {
 /// unlikely to be correct to use this in places like a `HashMap`.
 #[cfg_attr(feature = "serialize", derive(Deserialize, Serialize))]
 #[cfg_attr(feature = "mem_dbg", derive(mem_dbg::MemSize, mem_dbg::MemDbg))]
-#[derive(Debug, Copy, Clone, PartialEq)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub struct XxHash32 {
     total_len: u64,
     seed: u32,
@@ -114,7 +114,7 @@ impl core::fmt::Debug for XxCore {
 }
 
 #[cfg_attr(feature = "serialize", derive(Serialize, Deserialize))]
-#[derive(Debug, Copy, Clone, Default, PartialEq)]
+#[derive(Debug, Copy, Clone, Default, PartialEq, Eq)]
 #[repr(align(4))]
 #[cfg_attr(feature = "serialize", serde(transparent))]
 #[cfg_attr(feature = "mem_dbg", derive(mem_dbg::MemSize, mem_dbg::MemDbg))]
@@ -122,7 +122,7 @@ struct AlignToU32<T>(T);
 
 #[cfg_attr(feature = "serialize", derive(Serialize, Deserialize))]
 #[cfg_attr(feature = "mem_dbg", derive(mem_dbg::MemSize, mem_dbg::MemDbg))]
-#[derive(Debug, Copy, Clone, Default, PartialEq)]
+#[derive(Debug, Copy, Clone, Default, PartialEq, Eq)]
 struct Buffer {
     #[cfg_attr(feature = "serialize", serde(rename = "buffer"))]
     data: AlignToU32<[u8; CHUNK_SIZE]>,
